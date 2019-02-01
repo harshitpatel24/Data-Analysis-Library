@@ -45,3 +45,40 @@ def mode(npArray):
         return modeValue
     else:
         return None
+
+def variance(npArray):
+    noOfElements = arrayOperations.countNoOfElements(npArray)
+    if noOfElements > 0:
+        meanValue = mean(npArray)
+        xMinusMeanValuesSquare = []
+        for value in npArray:
+            xMinusMeanValuesSquare.append((value - meanValue) ** 2)
+        sumOfxMinusMeanValuesSquare = 0
+        for squareValue in xMinusMeanValuesSquare:
+            sumOfxMinusMeanValuesSquare = sumOfxMinusMeanValuesSquare + squareValue
+        varianceValue = sumOfxMinusMeanValuesSquare / noOfElements
+        return varianceValue
+    else:
+        return None
+
+def standardDeviation(npArray):
+    varianceValue = variance(npArray)
+    if varianceValue != None:
+        standardDeviationValue = varianceValue ** 0.5
+        return standardDeviationValue
+    else:
+        return None
+
+
+def skew(npArray):
+    noOfElements = arrayOperations.countNoOfElements(npArray)
+    if noOfElements > 0:
+        meanValue = mean(npArray)
+        standardDeviationValue = standardDeviation(npArray)
+        sumOfCubeValues = 0
+        for value in npArray:
+            sumOfCubeValues = sumOfCubeValues + ((value - meanValue) / standardDeviationValue) ** 3
+        skewValue = sumOfCubeValues / noOfElements
+        return skewValue
+    else:
+        return None
